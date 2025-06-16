@@ -1,5 +1,19 @@
 import './style.css';
 
+//Compare letters
+const compare = (quote, writting) => {
+	const quoteContainer = document.querySelector('.quote h2').children;
+
+	writting.forEach((letter, index) => {
+		const currentQuoteLetter = quote[index].toLowerCase();
+		if (letter === currentQuoteLetter) {
+			quoteContainer[index].classList.add('check');
+		} else {
+			quoteContainer[index].classList.add('error');
+		}
+	});
+};
+
 // Render Quote and Keyboard
 const keys = [
 	['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -38,11 +52,8 @@ for (const list of keys) {
 
 keyboardElement.innerHTML += keyboardUIFragment;
 
-//Compare texts
-// const currentQuote = quotes[0].toLowerCase().split('');
-const currentWritting = [];
-
 // Activate pressed state
+const currentWritting = [];
 const chars = [
 	'a',
 	'b',
@@ -79,11 +90,13 @@ document.body.addEventListener('keydown', (e) => {
 
 	if (e.key === ' ') {
 		currentWritting.push(e.key);
+		compare(currentQuote, currentWritting);
 		return;
 	}
 
 	if (e.key === 'Backspace') {
 		currentWritting.pop();
+		compare(currentQuote, currentWritting);
 		return;
 	}
 
@@ -96,4 +109,5 @@ document.body.addEventListener('keydown', (e) => {
 	}, 200);
 
 	currentWritting.push(e.key);
+	compare(currentQuote, currentWritting);
 });
