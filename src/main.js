@@ -4,6 +4,10 @@ import './style.css';
 const compare = (quote, writting) => {
 	const quoteContainer = document.querySelector('.quote h2').children;
 
+	for (const element of quoteContainer) {
+		element.classList.remove('check', 'error');
+	}
+
 	writting.forEach((letter, index) => {
 		const currentQuoteLetter = quote[index].toLowerCase();
 		if (letter === currentQuoteLetter) {
