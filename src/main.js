@@ -40,7 +40,7 @@ for (const letter of currentQuote) {
 	quoteFragment += `<span>${letter}</span>`;
 }
 
-quoteElement.innerHTML = `<h2>${quoteFragment}</h2>`;
+quoteElement.innerHTML = `<h2 class="quote-heading">${quoteFragment}</h2>`;
 
 let keyboardUIFragment = '';
 
