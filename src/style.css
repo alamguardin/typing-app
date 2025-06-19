@@ -63,11 +63,11 @@
 }
 
 .key.press {
-	box-shadow: -4px 0 0 #f9fafb,
-				4px 0 0 #f9fafb,
-				0 -4px 0 #f9fafb,
-				0 4px 0 #f9fafb;
-	color: #f9fafb;
+	box-shadow: -4px 0 0 #a684ff,
+				4px 0 0 #a684ff,
+				0 -4px 0 #a684ff,
+				0 4px 0 #a684ff;
+	color: #a684ff;
 }
 
 .error {
