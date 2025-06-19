@@ -1,4 +1,5 @@
 import './style.css';
+import { KEYBOARD_KEYS, ALLOWED_KEYS } from './constants/const';
 
 //Compare letters
 const compare = (quote, writting) => {
@@ -19,12 +20,6 @@ const compare = (quote, writting) => {
 };
 
 // Render Quote and Keyboard
-const keys = [
-	['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-	['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-	['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-];
-
 const quotes = [
 	'Dale sentido a tu existencia muriendo como un heroe',
 	'Si no luchamos, no podemos ganar',
@@ -44,7 +39,7 @@ quoteElement.innerHTML = `<h2 class="quote-heading">${quoteFragment}</h2>`;
 
 let keyboardUIFragment = '';
 
-for (const list of keys) {
+for (const list of KEYBOARD_KEYS) {
 	let keyList = '';
 
 	for (const key of list) {
@@ -58,39 +53,9 @@ keyboardElement.innerHTML += keyboardUIFragment;
 
 // Activate pressed state
 const currentWritting = [];
-const chars = [
-	'a',
-	'b',
-	'c',
-	'd',
-	'e',
-	'f',
-	'g',
-	'h',
-	'i',
-	'j',
-	'k',
-	'l',
-	'm',
-	'n',
-	'o',
-	'p',
-	'q',
-	'r',
-	's',
-	't',
-	'u',
-	'v',
-	'w',
-	'x',
-	'y',
-	'z',
-	' ',
-	'Backspace',
-];
 
 document.body.addEventListener('keydown', (e) => {
-	if (!chars.includes(e.key)) return;
+	if (!ALLOWED_KEYS.includes(e.key)) return;
 
 	if (e.key === ' ') {
 		currentWritting.push(e.key);
