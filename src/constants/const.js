@@ -76,4 +76,6 @@ const ALLOWED_KEYS = [
 	'BracketLeft',
 ];
 
-export { KEYBOARD_KEYS, ALLOWED_KEYS };
+const VOWELS = ['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'];
+
+export { KEYBOARD_KEYS, ALLOWED_KEYS, VOWELS };

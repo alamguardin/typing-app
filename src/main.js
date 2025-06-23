@@ -1,5 +1,5 @@
 import './style.css';
-import { KEYBOARD_KEYS, ALLOWED_KEYS } from './constants/const';
+import { KEYBOARD_KEYS, ALLOWED_KEYS, VOWELS } from './constants/const';
 import snk from './data/snk.json';
 
 /**
@@ -32,7 +32,7 @@ const compare = (quote, writting) => {
 
 // Ramdom Quote
 const randomQuote = (array) => {
-	const randomIndex = Math.floor(Math.random() * array.length + 1);
+	const randomIndex = Math.floor(Math.random() * array.length);
 
 	return array[randomIndex].quote;
 };
@@ -66,15 +66,10 @@ keyboardElement.innerHTML += keyboardUIFragment;
 
 // Activate pressed state
 const currentWritting = [];
+let deadIsActive = false;
 
 document.body.addEventListener('keydown', (e) => {
 	if (!ALLOWED_KEYS.includes(e.code)) return;
-
-	if (e.code === 'Backspace') {
-		currentWritting.pop();
-		compare(currentQuote, currentWritting);
-		return;
-	}
 
 	const currentKey = document.querySelector(`#${e.code.toLowerCase()}`);
 
@@ -83,6 +78,57 @@ document.body.addEventListener('keydown', (e) => {
 	setTimeout(() => {
 		currentKey.classList.remove('press');
 	}, 200);
+
+	if (e.code === 'BracketLeft') {
+		deadIsActive = true;
+		return;
+	}
+
+	if (deadIsActive) {
+		if (VOWELS.includes(e.key)) {
+			switch (e.key) {
+				case 'A':
+					currentWritting.push('Á');
+					break;
+				case 'E':
+					currentWritting.push('É');
+					break;
+				case 'I':
+					currentWritting.push('Í');
+					break;
+				case 'O':
+					currentWritting.push('ó');
+					break;
+				case 'U':
+					currentWritting.push('Ú');
+					break;
+				case 'a':
+					currentWritting.push('á');
+					break;
+				case 'e':
+					currentWritting.push('é');
+					break;
+				case 'i':
+					currentWritting.push('í');
+					break;
+				case 'o':
+					currentWritting.push('ó');
+					break;
+				case 'u':
+					currentWritting.push('u');
+					break;
+			}
+			compare(currentQuote, currentWritting);
+			deadIsActive = false;
+			return;
+		}
+	}
+
+	if (e.code === 'Backspace') {
+		currentWritting.pop();
+		compare(currentQuote, currentWritting);
+		return;
+	}
 
 	currentWritting.push(e.key);
 	compare(currentQuote, currentWritting);
