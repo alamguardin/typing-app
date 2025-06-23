@@ -56,7 +56,7 @@ for (const list of KEYBOARD_KEYS) {
 	let keyList = '';
 
 	for (const key of list) {
-		keyList += `<div class="key" id="${key.toLowerCase()}">${key}</div>`;
+		keyList += `<div class="key" id="${key.keyCode.toLowerCase()}">${key.key}</div>`;
 	}
 
 	keyboardUIFragment += `<div class="key-list">${keyList}</div>`;
@@ -68,27 +68,21 @@ keyboardElement.innerHTML += keyboardUIFragment;
 const currentWritting = [];
 
 document.body.addEventListener('keydown', (e) => {
-	if (!ALLOWED_KEYS.includes(e.key)) return;
+	if (!ALLOWED_KEYS.includes(e.code)) return;
 
-	if (e.key === ' ') {
-		currentWritting.push(e.key);
-		compare(currentQuote, currentWritting);
-		return;
-	}
-
-	if (e.key === 'Backspace') {
+	if (e.code === 'Backspace') {
 		currentWritting.pop();
 		compare(currentQuote, currentWritting);
 		return;
 	}
 
-	// const currentKey = document.querySelector(`#${e.key}`);
+	const currentKey = document.querySelector(`#${e.code.toLowerCase()}`);
 
-	// currentKey.classList.add('press');
+	currentKey.classList.add('press');
 
-	// setTimeout(() => {
-	// 	currentKey.classList.remove('press');
-	// }, 200);
+	setTimeout(() => {
+		currentKey.classList.remove('press');
+	}, 200);
 
 	currentWritting.push(e.key);
 	compare(currentQuote, currentWritting);
