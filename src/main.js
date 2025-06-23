@@ -2,9 +2,11 @@ import './style.css';
 import { KEYBOARD_KEYS, ALLOWED_KEYS } from './constants/const';
 import snk from './data/snk.json';
 
-console.log(snk);
-
-//Compare letters
+/**
+ * Compare two arrays strictly
+ * @param {string[]} quote
+ * @param {string[]} writting
+ */
 const compare = (quote, writting) => {
 	const quoteContainer = document.querySelector('.quote h2').children;
 
@@ -13,13 +15,19 @@ const compare = (quote, writting) => {
 	}
 
 	writting.forEach((letter, index) => {
-		const currentQuoteLetter = quote[index].toLowerCase();
+		const currentQuoteLetter = quote[index];
 		if (letter === currentQuoteLetter) {
 			quoteContainer[index].classList.add('check');
 		} else {
 			quoteContainer[index].classList.add('error');
 		}
 	});
+
+	const isEqual = JSON.stringify(quote) === JSON.stringify(writting);
+
+	console.log(isEqual);
+	console.log(quote);
+	console.log(writting);
 };
 
 // Ramdom Quote
@@ -74,13 +82,13 @@ document.body.addEventListener('keydown', (e) => {
 		return;
 	}
 
-	const currentKey = document.querySelector(`#${e.key}`);
+	// const currentKey = document.querySelector(`#${e.key}`);
 
-	currentKey.classList.add('press');
+	// currentKey.classList.add('press');
 
-	setTimeout(() => {
-		currentKey.classList.remove('press');
-	}, 200);
+	// setTimeout(() => {
+	// 	currentKey.classList.remove('press');
+	// }, 200);
 
 	currentWritting.push(e.key);
 	compare(currentQuote, currentWritting);
