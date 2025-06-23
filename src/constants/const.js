@@ -33,6 +33,10 @@ const ALLOWED_KEYS = [
 	'z',
 	' ',
 	'Backspace',
+	'Enter',
+	'.',
+	',',
+	'Dead',
 ];
 
 export { KEYBOARD_KEYS, ALLOWED_KEYS };
