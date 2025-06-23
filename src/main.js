@@ -1,5 +1,8 @@
 import './style.css';
 import { KEYBOARD_KEYS, ALLOWED_KEYS } from './constants/const';
+import snk from './data/snk.json';
+
+console.log(snk);
 
 //Compare letters
 const compare = (quote, writting) => {
@@ -19,16 +22,18 @@ const compare = (quote, writting) => {
 	});
 };
 
-// Render Quote and Keyboard
-const quotes = [
-	'Dale sentido a tu existencia muriendo como un heroe',
-	'Si no luchamos, no podemos ganar',
-];
+// Ramdom Quote
+const randomQuote = (array) => {
+	const randomIndex = Math.floor(Math.random() * array.length + 1);
 
+	return array[randomIndex].quote;
+};
+
+// Render Quote and Keyboard
 const quoteElement = document.querySelector('.quote');
 const keyboardElement = document.querySelector('.keyboard');
 
-const currentQuote = quotes[0].split('');
+const currentQuote = randomQuote(snk).split('');
 let quoteFragment = '';
 
 for (const letter of currentQuote) {
