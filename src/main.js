@@ -40,99 +40,106 @@ const randomQuote = (array) => {
 	return array[randomIndex].quote;
 };
 
-// Render Quote and Keyboard
-const quoteElement = document.querySelector('.quote');
-const keyboardElement = document.querySelector('.keyboard');
+document.addEventListener('DOMContentLoaded', () => {
+	// Draw quote Element
 
-const currentQuote = randomQuote(snk).split('');
-let quoteFragment = '';
+	const quoteElement = document.querySelector('.quote');
 
-for (const letter of currentQuote) {
-	quoteFragment += `<span>${letter}</span>`;
-}
+	const currentQuote = randomQuote(snk).split('');
+	let quoteFragment = '';
 
-quoteElement.innerHTML = `<h2 class="quote-heading">${quoteFragment}</h2>`;
-
-let keyboardUIFragment = '';
-
-for (const list of KEYBOARD_KEYS) {
-	let keyList = '';
-
-	for (const key of list) {
-		keyList += `<div class="key" id="${key.keyCode.toLowerCase()}">${key.key}</div>`;
+	for (const letter of currentQuote) {
+		quoteFragment += `<span>${letter}</span>`;
 	}
 
-	keyboardUIFragment += `<div class="key-list">${keyList}</div>`;
-}
+	quoteElement.innerHTML = `<h2 class="quote-heading">${quoteFragment}</h2>`;
 
-keyboardElement.innerHTML += keyboardUIFragment;
+	// Draw keyboard UI
 
-// Activate pressed state
-const currentWritting = [];
-let deadIsActive = false;
+	const keyboardElement = document.querySelector('.keyboard');
 
-document.body.addEventListener('keydown', (e) => {
-	if (!ALLOWED_KEYS.includes(e.code)) return;
+	let keyboardUIFragment = '';
 
-	const currentKey = document.querySelector(`#${e.code.toLowerCase()}`);
+	for (const list of KEYBOARD_KEYS) {
+		let keyList = '';
 
-	currentKey.classList.add('press');
+		for (const key of list) {
+			keyList += `<div class="key" id="${key.keyCode.toLowerCase()}">${key.key}</div>`;
+		}
 
-	setTimeout(() => {
-		currentKey.classList.remove('press');
-	}, 200);
-
-	if (e.code === 'BracketLeft') {
-		deadIsActive = true;
-		return;
+		keyboardUIFragment += `<div class="key-list">${keyList}</div>`;
 	}
 
-	if (deadIsActive) {
-		if (VOWELS.includes(e.key)) {
-			switch (e.key) {
-				case 'A':
-					currentWritting.push('Á');
-					break;
-				case 'E':
-					currentWritting.push('É');
-					break;
-				case 'I':
-					currentWritting.push('Í');
-					break;
-				case 'O':
-					currentWritting.push('ó');
-					break;
-				case 'U':
-					currentWritting.push('Ú');
-					break;
-				case 'a':
-					currentWritting.push('á');
-					break;
-				case 'e':
-					currentWritting.push('é');
-					break;
-				case 'i':
-					currentWritting.push('í');
-					break;
-				case 'o':
-					currentWritting.push('ó');
-					break;
-				case 'u':
-					currentWritting.push('u');
-					break;
-			}
-			compare(currentQuote, currentWritting);
-			deadIsActive = false;
+	keyboardElement.innerHTML += keyboardUIFragment;
+
+	// Handle keyboard Events
+
+	const currentWritting = [];
+	let deadIsActive = false;
+
+	document.body.addEventListener('keydown', (e) => {
+		if (!ALLOWED_KEYS.includes(e.code)) return;
+
+		const currentKey = document.querySelector(`#${e.code.toLowerCase()}`);
+
+		currentKey.classList.add('press');
+
+		setTimeout(() => {
+			currentKey.classList.remove('press');
+		}, 200);
+
+		if (e.code === 'BracketLeft') {
+			deadIsActive = true;
 			return;
 		}
-	}
 
-	if (e.code === 'Backspace') {
-		currentWritting.pop();
+		if (deadIsActive) {
+			if (VOWELS.includes(e.key)) {
+				switch (e.key) {
+					case 'A':
+						currentWritting.push('Á');
+						break;
+					case 'E':
+						currentWritting.push('É');
+						break;
+					case 'I':
+						currentWritting.push('Í');
+						break;
+					case 'O':
+						currentWritting.push('ó');
+						break;
+					case 'U':
+						currentWritting.push('Ú');
+						break;
+					case 'a':
+						currentWritting.push('á');
+						break;
+					case 'e':
+						currentWritting.push('é');
+						break;
+					case 'i':
+						currentWritting.push('í');
+						break;
+					case 'o':
+						currentWritting.push('ó');
+						break;
+					case 'u':
+						currentWritting.push('u');
+						break;
+				}
+				compare(currentQuote, currentWritting);
+				deadIsActive = false;
+				return;
+			}
+		}
+
+		if (e.code === 'Backspace') {
+			currentWritting.pop();
+			compare(currentQuote, currentWritting);
+			return;
+		}
+
+		currentWritting.push(e.key);
 		compare(currentQuote, currentWritting);
-		return;
-	}
-
-	currentWritting.push(e.key);
-	compare(currentQuote, currentWritting);
+	});
 });
