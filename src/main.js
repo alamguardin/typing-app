@@ -95,38 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (deadIsActive) {
 			if (VOWELS.includes(e.key)) {
-				switch (e.key) {
-					case 'A':
-						currentWritting.push('Á');
-						break;
-					case 'E':
-						currentWritting.push('É');
-						break;
-					case 'I':
-						currentWritting.push('Í');
-						break;
-					case 'O':
-						currentWritting.push('ó');
-						break;
-					case 'U':
-						currentWritting.push('Ú');
-						break;
-					case 'a':
-						currentWritting.push('á');
-						break;
-					case 'e':
-						currentWritting.push('é');
-						break;
-					case 'i':
-						currentWritting.push('í');
-						break;
-					case 'o':
-						currentWritting.push('ó');
-						break;
-					case 'u':
-						currentWritting.push('u');
-						break;
-				}
+				const vowelsWithAccent = [
+					'Á',
+					'É',
+					'Í',
+					'Ó',
+					'Ú',
+					'á',
+					'é',
+					'í',
+					'ó',
+					'ú',
+				];
+
+				const indexVowelWithAccent = VOWELS.findIndex((vowel) => {
+					return vowel === e.key;
+				});
+
 				compare(currentQuote, currentWritting);
 				deadIsActive = false;
 				return;
