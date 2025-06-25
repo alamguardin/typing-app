@@ -4,8 +4,9 @@ import snk from './data/snk.json';
 
 /**
  * Compare two arrays strictly
- * @param {string[]} quote
- * @param {string[]} writting
+ *
+ * @param {string[]} quote - Quote in use
+ * @param {string[]} writting - Current Writting
  */
 const compare = (quote, writting) => {
 	const quoteContainer = document.querySelector('.quote h2').children;
@@ -24,13 +25,15 @@ const compare = (quote, writting) => {
 	});
 
 	const isEqual = JSON.stringify(quote) === JSON.stringify(writting);
-
-	console.log(isEqual);
-	console.log(quote);
-	console.log(writting);
 };
 
-// Ramdom Quote
+/**
+ * Get random item from array
+ *
+ * @param {Object[]} array - Quote lists
+ *
+ * @returns {string} Quote item
+ */
 const randomQuote = (array) => {
 	const randomIndex = Math.floor(Math.random() * array.length);
 
