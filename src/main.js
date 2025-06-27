@@ -25,10 +25,16 @@ const compare = (quote, writting) => {
 	});
 
 	const isEqual = JSON.stringify(quote) === JSON.stringify(writting);
+
+	if (isEqual) {
+		currentQuote = randomQuote(snk).split('');
+		currentWritting = [];
+		drawQuote(currentQuote);
+	}
 };
 
 /**
- * Get random item from array
+ * Get random item from arrayconcat
  *
  * @param {Object[]} array - Quote lists
  *
@@ -40,19 +46,23 @@ const randomQuote = (array) => {
 	return array[randomIndex].quote;
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-	// Draw quote Element
-
+const drawQuote = (quote) => {
 	const quoteElement = document.querySelector('.quote');
 
-	const currentQuote = randomQuote(snk).split('');
 	let quoteFragment = '';
 
-	for (const letter of currentQuote) {
+	for (const letter of quote) {
 		quoteFragment += `<span>${letter}</span>`;
 	}
 
 	quoteElement.innerHTML = `<h2 class="quote-heading">${quoteFragment}</h2>`;
+};
+
+let currentQuote = randomQuote(snk).split('');
+let currentWritting = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+	drawQuote(currentQuote);
 
 	// Draw keyboard UI
 
@@ -74,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Handle keyboard Events
 
-	const currentWritting = [];
 	let deadIsActive = false;
 
 	document.body.addEventListener('keydown', (e) => {
@@ -112,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					return vowel === e.key;
 				});
 
+				currentWritting.push(vowelsWithAccent[indexVowelWithAccent]);
 				compare(currentQuote, currentWritting);
 				deadIsActive = false;
 				return;
