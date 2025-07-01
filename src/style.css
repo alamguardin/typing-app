@@ -43,31 +43,175 @@
 }
 
 .key-list {
-	display: flex;
-	gap: 24px;
+	display: grid;
+	display: grid;
+	grid-template-columns: repeat(11, 48px);
+	grid-template-rows: repeat(4, 48px);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	grid-template-areas: 
+	"KeyQ KeyW KeyE KeyR KeyT KeyY KeyU KeyI KeyO KeyP BracketLeft"
+	"KeyA KeyS KeyD KeyF KeyG KeyH KeyJ KeyK KeyL Semicolon ."
+	"KeyZ KeyX KeyC KeyV KeyB KeyN KeyM Comma Period Backspace Backspace"
+	". . . Space Space Space . . . . .";
 }
 
 .key {
-	width: 3rem;
-	height: 3rem;
-	/* border: 2px solid gray; */
-	box-shadow: -4px 0 0 #4a5565,
-				4px 0 0 #4a5565,
-				0 -4px 0 #4a5565,
-				0 4px 0 #4a5565;
-	font-size: 1.5rem;
-	color: #4a5565;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	overflow: hidden;
+}
+
+.key > img {
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
 }
 
 .key.press {
-	box-shadow: -4px 0 0 #a684ff,
-				4px 0 0 #a684ff,
-				0 -4px 0 #a684ff,
-				0 4px 0 #a684ff;
-	color: #a684ff;
+	transform: translateY(5px);
+}
+
+#KeyQ {
+	grid-area: KeyQ;
+}
+
+#KeyW {
+	grid-area: KeyW;
+}
+
+#KeyE {
+	grid-area: KeyE;
+}
+
+#KeyR {
+	grid-area: KeyR;
+}
+
+#KeyT {
+	grid-area: KeyT;
+}
+
+#KeyY {
+	grid-area: KeyY;
+}
+
+#KeyU {
+	grid-area: KeyU;
+}
+
+#KeyI {
+	grid-area: KeyI;
+}
+
+#KeyO {
+	grid-area: KeyO;
+}
+
+#KeyP {
+	grid-area: KeyP;
+}
+
+#BracketLeft {
+	grid-area: BracketLeft;
+}
+
+#KeyA {
+	grid-area: KeyA;
+}
+
+#KeyS {
+	grid-area: KeyS;
+}
+
+#KeyD {
+	grid-area: KeyD;
+}
+
+#KeyF {
+	grid-area: KeyF;
+}
+
+#KeyG {
+	grid-area: KeyG;
+}
+
+#KeyH {
+	grid-area: KeyH;
+}
+
+#KeyJ {
+	grid-area: KeyJ;
+}
+
+#KeyK {
+	grid-area: KeyK;
+}
+
+#KeyL {
+	grid-area: KeyL;
+}
+
+#Semicolon {
+	grid-area: Semicolon;
+}
+
+#KeyZ {
+	grid-area: KeyZ;
+}
+
+#KeyX {
+	grid-area: KeyX;
+}
+
+#KeyC {
+	grid-area: KeyC;
+}
+
+#KeyV {
+	grid-area: KeyV;
+}
+
+#KeyB {
+	grid-area: KeyB;
+}
+
+#KeyN {
+	grid-area: KeyN;
+}
+
+#KeyM {
+	grid-area: KeyM;
+}
+
+#Comma {
+	grid-area: Comma;
+}
+
+#Period {
+	grid-area: Period;
+}
+
+#Backspace {
+	grid-area: Backspace;
+}
+
+#Space {
+ grid-area: Space;
+}
+
+#KeyQ, #KeyW, #KeyE, #KeyR, #KeyT, #KeyY, #KeyU, #KeyI, #KeyO, #KeyP, #BracketLeft {
+	z-index: 0;
+}
+
+#KeyA, #KeyS, #KeyD, #KeyF, #KeyG, #KeyH, #KeyJ, #KeyK, #KeyL, #Semicolon {
+	z-index: 1;
+}
+
+#KeyZ, #KeyX, #KeyC, #KeyV, #KeyB, #KeyN, #KeyM, #Comma, #Period, #Backspace {
+	z-index: 2;
+}
+
+#Space {
+	z-index: 3;
 }
 
 .error {

@@ -1,7 +1,7 @@
 const KEYBOARD_KEYS = [
 	[
-		{ key: 'W', keyCode: 'KeyW' },
 		{ key: 'Q', keyCode: 'KeyQ' },
+		{ key: 'W', keyCode: 'KeyW' },
 		{ key: 'E', keyCode: 'KeyE' },
 		{ key: 'R', keyCode: 'KeyR' },
 		{ key: 'T', keyCode: 'KeyT' },

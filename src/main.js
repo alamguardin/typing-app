@@ -1,6 +1,9 @@
 import './style.css';
 import { KEYBOARD_KEYS, ALLOWED_KEYS, VOWELS } from './constants/const';
 import snk from './data/snk.json';
+import { allKeys } from './constants/keys';
+
+console.log(allKeys);
 
 /**
  * Compare two arrays strictly
@@ -71,16 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	let keyboardUIFragment = '';
 
 	for (const list of KEYBOARD_KEYS) {
-		let keyList = '';
-
 		for (const key of list) {
-			keyList += `<div class="key" id="${key.keyCode.toLowerCase()}">${key.key}</div>`;
+			keyboardUIFragment += `
+			<div class="key" id="${key.keyCode}">
+				<img src=${allKeys[key.keyCode]}>
+			</div>
+			`;
 		}
-
-		keyboardUIFragment += `<div class="key-list">${keyList}</div>`;
 	}
 
-	keyboardElement.innerHTML += keyboardUIFragment;
+	keyboardElement.innerHTML += `<div class="key-list">${keyboardUIFragment}</div>`;
 
 	// Handle keyboard Events
 
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.body.addEventListener('keydown', (e) => {
 		if (!ALLOWED_KEYS.includes(e.code)) return;
 
-		const currentKey = document.querySelector(`#${e.code.toLowerCase()}`);
+		const currentKey = document.querySelector(`#${e.code}`);
 
 		currentKey.classList.add('press');
 
